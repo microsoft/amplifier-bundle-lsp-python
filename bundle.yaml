@@ -10,6 +10,6 @@ bundle:
 # Include core LSP bundle - this gives us the tool-lsp module
 # Our python config will deep merge with the core's empty languages: {}
 includes:
-  - lsp
+  - bundle: git+https://github.com/microsoft/amplifier-bundle-lsp@main
 
 default_behavior: python-lsp

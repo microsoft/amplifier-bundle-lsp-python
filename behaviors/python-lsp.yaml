@@ -6,6 +6,10 @@ bundle:
   name: behavior-python-lsp
   version: 0.1.0
 
+# Include lsp-core behavior to get the tool-lsp module with source
+includes:
+  - bundle: git+https://github.com/microsoft/amplifier-bundle-lsp@main#subdirectory=behaviors/lsp-core.yaml
+
 # Tool configuration - deep merges with core bundle's tool-lsp
 tools:
   - module: tool-lsp
