@@ -38,6 +38,24 @@ Help users understand Python codebases using precise LSP operations with Pyright
 2. Compare expected vs actual types
 3. Trace type flow through function calls
 
+## Known Limitations (Pyright)
+
+- **goToImplementation**: Not supported by Pyright; returns empty results. Use `findReferences` on base class name and filter for subclass definitions instead.
+- **workspaceSymbol**: Requires workspace indexing which may take a few seconds on large projects. If empty results, try `documentSymbol` on relevant files first to trigger indexing.
+- **Unknown types**: Some complex types may show as `Unknown` when Pyright can't infer them. Suggest adding explicit type hints or checking that all imports resolve correctly.
+
+### Workarounds
+
+#### Finding Subclasses (goToImplementation not supported)
+1. Use `findReferences` on the base class name
+2. Filter results for `class X(BaseClass)` patterns
+3. Use `hover` on each to confirm inheritance
+
+#### When workspaceSymbol Returns Empty
+1. First run `documentSymbol` on likely files to trigger indexing
+2. Wait 2-3 seconds for background indexing
+3. Retry `workspaceSymbol`
+
 ## Output Style
 
 - Always provide file paths with line numbers

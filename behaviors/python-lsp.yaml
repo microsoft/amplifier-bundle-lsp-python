@@ -38,7 +38,7 @@ tools:
               analysis:
                 autoSearchPaths: true
                 useLibraryCodeForTypes: true
-                diagnosticMode: openFilesOnly
+                diagnosticMode: workspace
 
 # Python-specific context for agents
 context:

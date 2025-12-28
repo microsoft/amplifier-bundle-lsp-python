@@ -60,3 +60,19 @@ The Python LSP detects workspace root by looking for:
 - .git directory
 
 Ensure your project has one of these at the root for accurate analysis.
+
+## Known Limitations
+
+### Operations Not Fully Supported by Pyright
+
+- **goToImplementation**: Returns empty results. Pyright doesn't support finding subclasses/implementations directly.
+  - **Workaround**: Use `findReferences` on the base class and filter for `class` definitions.
+
+- **workspaceSymbol**: May return empty on first use before workspace is indexed.
+  - **Workaround**: Run `documentSymbol` on relevant files first to trigger indexing, then retry.
+
+### Type Resolution
+
+- Complex generic types or dynamically-created classes may show as `Unknown`
+- Missing stub packages (e.g., `types-requests`) can cause type resolution failures
+- Circular imports may confuse type inference
