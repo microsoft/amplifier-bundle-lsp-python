@@ -1,0 +1,15 @@
+# Python LSP Bundle
+# Provides Python language support for code intelligence via LSP.
+# Includes the core LSP bundle and adds Python-specific configuration.
+
+bundle:
+  name: lsp-python
+  version: 0.1.0
+  description: Python LSP support via Pyright
+
+# Include core LSP bundle - this gives us the tool-lsp module
+# Our python config will deep merge with the core's empty languages: {}
+includes:
+  - lsp
+
+default_behavior: python-lsp
