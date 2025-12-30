@@ -88,3 +88,48 @@ Ensure your project has one of these at the root for accurate analysis.
 - Complex generic types or dynamically-created classes may show as `Unknown`
 - Missing stub packages (e.g., `types-requests`) can cause type resolution failures
 - Circular imports may confuse type inference
+
+## Common Installation Issues
+
+### "Cannot find module" pointing to Homebrew Cellar path
+
+This usually means you have stale wrapper scripts from a previous Homebrew installation:
+
+1. **Check**: `cat $(which pyright)` - if it's a bash script pointing to `/opt/homebrew/Cellar/...`, it's stale
+2. **Fix**: Remove stale wrappers (the error message will show the exact path):
+   ```bash
+   rm ~/.local/bin/pyright ~/.local/bin/pyright-langserver
+   ```
+3. **Reinstall**: `npm install -g pyright`
+4. **Verify**: `which pyright && pyright --version`
+
+### npm install succeeds but LSP still fails
+
+The new installation might be shadowed by an older one earlier in PATH:
+
+1. **Check**: `which -a pyright` to see all locations
+2. **Remove stale ones**: Usually in `~/.local/bin/` or old Homebrew paths
+3. **Verify**: The first result of `which pyright` should be the working one
+
+### "bad interpreter" error
+
+The pyright script has a broken shebang (common after Homebrew updates):
+
+1. **Check**: `head -1 $(which pyright)` - look for `@@HOMEBREW_PREFIX@@` or missing node path
+2. **Fix**: Remove and reinstall via npm:
+   ```bash
+   rm $(which pyright)
+   npm install -g pyright
+   ```
+
+### Both pyright AND pyright-langserver need to work
+
+The LSP uses `pyright-langserver`, not just `pyright`. Both can have stale wrappers:
+
+```bash
+# Check both
+which pyright && pyright --version
+which pyright-langserver
+
+# If either fails, remove stale wrappers from the reported path
+```
