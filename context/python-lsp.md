@@ -2,6 +2,18 @@
 
 You have access to Python code intelligence via the LSP tool with Pyright.
 
+## Quick Start - Most Useful Operations
+
+| Want to... | Use this |
+|------------|----------|
+| See what type a variable is | `hover` on the variable |
+| Find all usages of a function | `findReferences` on the function name |
+| Jump to a function's definition | `goToDefinition` on a call site |
+| See what calls a function | `incomingCalls` on the function |
+| See what a function calls | `outgoingCalls` on the function |
+
+**Tip**: `hover` and `findReferences` are the most reliable. Start with these.
+
 ## Python-Specific Capabilities
 
 - **Type Information**: Get precise type hints and inferred types
