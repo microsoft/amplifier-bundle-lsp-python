@@ -11,5 +11,4 @@ bundle:
 # Our python config will deep merge with the core's empty languages: {}
 includes:
   - bundle: git+https://github.com/microsoft/amplifier-bundle-lsp@main
-
-default_behavior: python-lsp
+  - bundle: lsp-python:behaviors/python-lsp.yaml
