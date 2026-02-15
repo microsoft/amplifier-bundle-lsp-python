@@ -1,12 +1,20 @@
-# Python LSP Bundle
-# Provides Python language support for code intelligence via LSP.
-# The python-lsp behavior includes lsp-core which provides the tool-lsp module.
-
 bundle:
   name: lsp-python
-  version: 0.1.0
-  description: Python LSP support via Pyright
+  version: 2.0.0
+  description: "DEPRECATED: Consolidated into python-dev. This bundle forwards automatically."
 
-# Include only the python-lsp behavior - it already includes lsp-core internally
 includes:
-  - bundle: lsp-python:behaviors/python-lsp.yaml
+  - bundle: git+https://github.com/microsoft/amplifier-bundle-python-dev@main
+
+hooks:
+  - module: hooks-deprecation
+    source: git+https://github.com/microsoft/amplifier-foundation@main#subdirectory=modules/hooks-deprecation
+    config:
+      bundle_name: lsp-python
+      replacement: amplifier-bundle-python-dev
+      message: "amplifier-bundle-lsp-python has been consolidated into amplifier-bundle-python-dev"
+      migration: |
+        Update your includes:
+        -   - bundle: git+https://github.com/microsoft/amplifier-bundle-lsp-python@main
+        +   - bundle: git+https://github.com/microsoft/amplifier-bundle-python-dev@main
+      severity: warning
